@@ -1,0 +1,54 @@
+#### general settings
+name: output_GPEMSR_x16
+scale: 16
+save_path: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/test/SR/x16
+pretrain_path: /GPEMSR-CREMI/GPEMSR/pre-train_model/stage3_x16.pth
+dataset:
+  name: CREMIDataset
+  mode: val
+  dataroot_GT: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/test/HR/x16
+  dataroot_LQ: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/test/LR/x16
+  N_frames: 5
+  phase: val
+
+#### network structures
+network:
+  ref_path_G: /GPEMSR-CREMI/GPEMSR/pre-train_model/stage1.pth
+  ref_path_Indexer: /GPEMSR-CREMI/GPEMSR/pre-train_model/stage2_x16.pth
+  nf: 64
+  nframes: 5
+  groups: 8
+  front_RBs: 5
+  back_RBs: 10
+  w_ref: True
+  ref_fusion_feat_RBs: 1
+  align_mode: 'POD'
+  align_atten: false
+  fusion_mode: 'ThreeDA'
+  mode: '16to1'
+  argref:
+    Indexer16:
+      channel_list: [64,64,128,256,512]
+      im_channel: 1
+      num_resblock_per_scale: 2
+      num_output_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+    Encoder:
+      channel_list: [64,64,128,256,512]
+      im_channel: 1
+      num_resblock_per_scale: 1
+      num_output_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+    Codebook:
+      num_codebook_vectors: 1024
+      latent_dim: 512
+      beta: 1
+    Decoder:
+      channel_list: [512,256,128,64,64]
+      im_channel: 1
+      num_resblock_per_scale: 1
+      num_input_resblck: 3
+      latent_dim: 512
+      use_non_local: true

@@ -1,0 +1,48 @@
+NAME: 'seg_3d'
+
+MODEL:
+    model_type: 'mala'  # 'mala' or 'superhuman'
+    input_nc: 1
+    output_nc: 3
+    unetr_size: [32,160,160]
+    patch_size: [4,16,16]
+    kernel_size: [1,3,3]
+    if_sigmoid: True
+    # for 'mala':
+    init_mode_mala: 'kaiming'
+    # for 'superhuman':
+    if_skip: 'False'
+    filters: 
+        - 28
+        - 36
+        - 48
+        - 64
+        - 80
+    upsample_mode: 'bilinear'
+    decode_ratio: 1
+    merge_mode: 'add'
+    pad_mode: 'zero'
+    bn_mode: 'async'
+    relu_mode: 'elu'
+    init_mode: 'kaiming_normal'
+
+DATA:
+    dataset_name: 'cremi-C'
+    valid_dataset: 'cremiCsr'
+    im_path: 'x8'
+    train_split: 75
+    test_split: 50
+    data_folder: '/GPEMSR-CREMI/GPEMSR/dataset/CREMI/test/SR'
+    padding: 50
+    shift_channels: ~
+    if_dilate: True
+    widen_way: True
+    if_scale_aug: False
+    if_filp_aug: True
+    if_rotation_aug: True
+    if_intensity_aug: True
+    if_elastic_aug: True
+
+TEST:
+    pad: 0
+    model_name: ''

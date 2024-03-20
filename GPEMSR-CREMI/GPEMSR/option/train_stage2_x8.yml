@@ -1,0 +1,93 @@
+#### general settings
+name: Indexer_stage2_x8
+scale: 8
+use_tb_logger: true
+use_gpu: true
+dist: true
+save_checkpoint_freq: !!float 5e3
+stage: 2
+path:
+  root: ~
+
+#### datasets
+datasets:
+  train:
+    name: Indexer_train
+    mode: train
+    chooseGTtxt: /GPEMSR-CREMI/GPEMSR/data/train_vqgan.txt
+    random_reverse: false
+    border_mode: false
+    dataroot_GT: /GPEMSR-CREMI/GPEMSR/dataset/stage1_2_data/HR/x8
+    dataroot_LR: /GPEMSR-CREMI/GPEMSR/dataset/stage1_2_data/LR/x8
+    use_shuffle: true
+    n_workers: 16  # per GPU
+    batch_size: 8
+    GT_size: 1024
+    use_flip: true
+    use_rot: true
+  val:
+    name: Indexer_val
+    mode: val
+    chooseGTtxt: /GPEMSR-CREMI/GPEMSR/data/val_vqgan.txt
+    dataroot_GT: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/val/HR/x8
+    dataroot_LR: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/val/LR/x8
+
+#### network structures
+network:
+  lrGenerator8:
+    Indexer8:
+      channel_list: [64,64,128,256,512]
+      im_channel: 1
+      num_resblock_per_scale: 2
+      num_output_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+    Encoder:
+      channel_list: [64,64,128,256,512]
+      im_channel: 1
+      num_resblock_per_scale: 1
+      num_output_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+    Codebook:
+      num_codebook_vectors: 1024
+      latent_dim: 512
+      beta: 1 #loss权重
+    Decoder:
+      channel_list: [512,256,128,64,64]
+      im_channel: 1
+      num_resblock_per_scale: 1
+      num_input_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+  Discriminator:
+    im_channel: 1
+    num_filters_last: 64
+    n_layers: 3
+
+#### pretrain
+pretrain:
+  Indexer: ~
+  VQGAN_G: /GPEMSR-CREMI/GPEMSR/pre-train_model/stage1.pth
+  strict_load: true #lrencoder
+
+#### training settings: learning rate scheme, loss
+train:
+  current_step: 0
+  start_epoch: 0
+  lr_G: !!float 4e-4
+  lr_scheme: CosineAnnealingLR_Restart
+  beta1: 0.9
+  beta2: 0.99
+  niter: 480000
+  T_period: [40000, 80000, 120000, 120000, 120000]
+  restarts: [40000, 80000, 240000, 360000]
+  restart_weights: [1, 1, 1, 1]
+  eta_min: !!float 1e-7
+  val_freq: !!float 5e3
+  manual_seed: 0
+  logger_freq: 100
+
+val:
+  val_freq: !!float 5e3
+  val_path_version: Indexer_stage2_x8

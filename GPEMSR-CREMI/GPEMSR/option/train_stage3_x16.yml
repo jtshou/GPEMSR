@@ -1,0 +1,112 @@
+#### general settings
+name: GPEMSR_x16
+scale: 16
+use_tb_logger: true
+use_gpu: true
+dist: true
+save_checkpoint_freq: !!float 5e3
+stage: 3
+path:
+  root: ~
+
+#### datasets
+datasets:
+  train:
+    name: CREMIDataset
+    mode: train
+    interval_list: [1]
+    random_reverse: false
+    border_mode: false
+    dataroot_GT: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/train/HR/x16
+    dataroot_LQ: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/train/LR/x16
+    N_frames: 5
+    use_shuffle: true
+    n_workers: 16  # per GPU
+    batch_size: 8
+    GT_size: 256
+    LQ_size: 16
+    use_flip: true
+    use_rot: true
+
+  val:
+    name: CREMIDataset
+    mode: val
+    dataroot_GT: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/val/HR/x16
+    dataroot_LQ: /GPEMSR-CREMI/GPEMSR/dataset/CREMI/val/LR/x16
+    interval_list: [1]
+    random_reverse: false
+    border_mode: false
+    N_frames: 5
+
+#### network structures
+network:
+  ref_path_G: /GPEMSR-CREMI/GPEMSR/pre-train_model/stage1.pth
+  ref_path_Indexer: /GPEMSR-CREMI/GPEMSR/pre-train_model/stage2_x16.pth
+  nf: 64
+  nframes: 5
+  groups: 8
+  front_RBs: 5
+  back_RBs: 10
+  w_ref: True
+  ref_fusion_feat_RBs: 1
+  align_mode: 'POD'
+  align_atten: false
+  fusion_mode: 'ThreeDA'
+  mode: '16to1'
+  argref:
+    Indexer16:
+      channel_list: [64,64,128,256,512]
+      im_channel: 1
+      num_resblock_per_scale: 2
+      num_output_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+    Encoder:
+      channel_list: [64,64,128,256,512]
+      im_channel: 1
+      num_resblock_per_scale: 1
+      num_output_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+    Codebook:
+      num_codebook_vectors: 1024
+      latent_dim: 512
+      beta: 1
+    Decoder:
+      channel_list: [512,256,128,64,64]
+      im_channel: 1
+      num_resblock_per_scale: 1
+      num_input_resblck: 3
+      latent_dim: 512
+      use_non_local: true
+
+
+#### pretrain
+pretrain:
+  EMSR: ~
+  strict_load: true #lrencoder
+  training_state: ~
+
+#### training settings: learning rate scheme, loss
+train:
+  current_step: 0
+  start_epoch: 0
+  lr_G: !!float 4e-4
+  lr_scheme: CosineAnnealingLR_Restart
+  beta1: 0.9
+  beta2: 0.99
+  niter: 480000
+  T_period: [40000, 80000, 120000, 120000, 120000]
+  restarts: [40000, 120000, 240000, 360000]
+  restart_weights: [1, 1, 1, 1]
+  eta_min: !!float 1e-7
+  val_freq: !!float 5e3
+  manual_seed: 0
+  rec_loss_factor: 1
+  ref_loss_factor: 0.01
+  ssim_loss: 0
+  logger_freq: 100
+
+val:
+  val_freq: !!float 5e3
+  val_path_version: GPEMSR_x16
