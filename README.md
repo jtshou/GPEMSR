@@ -1,5 +1,5 @@
 # Learning Large-Factor EM Image Super-Resolution with Generative Priors (GPEMSR)
-**Accepted by CVPR-2024**
+**Accepted by CVPR-2024**  
 Jiateng Shou, Zeyu Xiao, Shiyu Deng, Wei Huang, Peiyao Shi, Ruobing Zhang, Zhiwei Xiong, Feng Wu*  
 MoE Key Laboratory of Brain-inspired Intelligent Perception and Cognition, University of Science and Technology of China  
 Suzhou Institute of Biomedical Engineering and Technology, Chinese Academy of Sciences  
