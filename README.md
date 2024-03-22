@@ -1,19 +1,19 @@
 # Learning Large-Factor EM Image Super-Resolution with Generative Priors (GPEMSR)
 **Accepted by CVPR-2024**
-Jiateng Shou, Zeyu Xiao, Shiyu Deng, Wei Huang, Peiyao Shi, Ruobing Zhang, Zhiwei Xiong, Feng Wu*
-MoE Key Laboratory of Brain-inspired Intelligent Perception and Cognition, University of Science and Technology of China
-Suzhou Institute of Biomedical Engineering and Technology, Chinese Academy of Sciences
-Institute of Artificial Intelligence, Hefei Comprehensive National Science Center
+Jiateng Shou, Zeyu Xiao, Shiyu Deng, Wei Huang, Peiyao Shi, Ruobing Zhang, Zhiwei Xiong, Feng Wu*  
+MoE Key Laboratory of Brain-inspired Intelligent Perception and Cognition, University of Science and Technology of China  
+Suzhou Institute of Biomedical Engineering and Technology, Chinese Academy of Sciences  
+Institute of Artificial Intelligence, Hefei Comprehensive National Science Center  
 *Corresponding Author
 
 ![ ](./imgs/overview.png)
 
 ## Code instruction
-We provide code for two dataset separately.
+We provide code for two dataset separately.  
 Code for AC4 dataset is coming soon.
 
 ## Training
-Three stages of our model are trained separately.
+Three stages of our model are trained separately.  
 We provide all the training code and configuration files.
 
 ## Testing
@@ -21,7 +21,7 @@ We provide all the training code and configuration files.
 Please put all the trained models in the 'pre-train_model' folder.
 #### Output test images
 ```sh
-python output_GPEMSR.py -opt option/output_GPEMSR_x8.yml # for 8x EMSR
+python output_GPEMSR.py -opt option/output_GPEMSR_x8.yml # for 8x EMSR  
 python output_GPEMSR.py -opt option/output_GPEMSR_x16.yml # for 16x EMSR
 ```
 
@@ -44,7 +44,7 @@ python inference_seg.py -c config/seg_x16_MALA.yaml # for 16x EMSR segmentation 
 ```
 
 ## Pre-trained models
-We provide pre-trained models for all three stages.
+We provide pre-trained models for all three stages.  
 We also provide pre-trained VGG model and SPyNet model.
 
 |      CREMI      |     AC4     |
