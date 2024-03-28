@@ -2,8 +2,8 @@
 **Accepted by CVPR-2024**  
 Jiateng Shou, Zeyu Xiao, Shiyu Deng, Wei Huang, Peiyao Shi, Ruobing Zhang, Zhiwei Xiong, Feng Wu*  
 MoE Key Laboratory of Brain-inspired Intelligent Perception and Cognition, University of Science and Technology of China  
-Suzhou Institute of Biomedical Engineering and Technology, Chinese Academy of Sciences  
 Institute of Artificial Intelligence, Hefei Comprehensive National Science Center  
+Suzhou Institute of Biomedical Engineering and Technology, Chinese Academy of Sciences  
 *Corresponding Author
 
 ![ ](./imgs/overview.png)
