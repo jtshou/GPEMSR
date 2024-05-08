@@ -58,4 +58,4 @@ We also provide pre-trained VGG model and SPyNet model.
 ![ ](./imgs/x8.png)
 
 ## Contact
-If you have any problem with the released code and dataset, please contact me by email ([shoujt@mail.ustc.edu.cn](mailto:shoujt@mail.ustc.edu.cn)).
+If you have any problem with the released code, please contact me by email ([shoujt@mail.ustc.edu.cn](mailto:shoujt@mail.ustc.edu.cn)).
