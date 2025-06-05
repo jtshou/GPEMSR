@@ -221,5 +221,5 @@ def seek_path(idx,dir_path,center):
         idx -= 1
         return seek_path(idx,dir_path,center)
 
-if '__name__'==main():
+if __name__=='__main__':
     main()
