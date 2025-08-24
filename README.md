@@ -9,8 +9,9 @@ Suzhou Institute of Biomedical Engineering and Technology, Chinese Academy of Sc
 ![ ](./imgs/overview.png)
 
 ## Code instruction
-We provide code for two dataset separately.  
-Code for AC4 dataset is coming soon.
+We provide comprehensive code implementations for the CREMI dataset.
+With minor modifications, the code can be readily adapted to the AC4 dataset.
+We provide all the pre-trained models.
 
 ## Training
 Three stages of our model are trained separately.  
@@ -24,9 +25,6 @@ Please put all the trained models in the 'pre-train_model' folder.
 python output_GPEMSR.py -opt option/output_GPEMSR_x8.yml # for 8x EMSR  
 python output_GPEMSR.py -opt option/output_GPEMSR_x16.yml # for 16x EMSR
 ```
-
-#### Visual metrics
-Coming soon.
 
 #### Segmentation metrics
 Please put the pre-trained segmentation models in the 'pre-train_model' folder.
@@ -42,6 +40,11 @@ python inference_seg.py -c config/seg_x8_MALA.yaml # for 8x EMSR segmentation us
 python inference_seg.py -c config/seg_x16_superhuman.yaml # for 16x EMSR segmentation using superhuman model
 python inference_seg.py -c config/seg_x16_MALA.yaml # for 16x EMSR segmentation using MALA model
 ```
+### AC4
+|   Superhuman    | MALA |
+|:---------------:|:--------:|
+| [GoogleDrive](https://drive.google.com/drive/folders/1CRJoJiuNWzCkjpZivePWUJ6b9WmASlP2?usp=sharing) | [GoogleDrive](https://drive.google.com/drive/folders/1CRJoJiuNWzCkjpZivePWUJ6b9WmASlP2?usp=sharing) |
+
 
 ## Pre-trained models
 We provide pre-trained models for all three stages.  
@@ -49,7 +52,7 @@ We also provide pre-trained VGG model and SPyNet model.
 
 |      CREMI      |     AC4     |
 |:---------------:|:-----------:|
-| [GoogleDrive](https://drive.google.com/drive/folders/1OhHJ0_Zx8VCxL2j6wsxoiXUgL_liTvxZ?usp=drive_link) | Coming Soon |
+| [GoogleDrive](https://drive.google.com/drive/folders/1OhHJ0_Zx8VCxL2j6wsxoiXUgL_liTvxZ?usp=drive_link) | [GoogleDrive](https://drive.google.com/drive/folders/1CRJoJiuNWzCkjpZivePWUJ6b9WmASlP2?usp=sharing) |
 
 ## 16x EMSR
 ![ ](./imgs/x16.png)
